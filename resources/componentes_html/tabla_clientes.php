@@ -4,18 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@yield('title')</title>
-
+    <title>Document</title>
 </head>
-<!--header-->
-<!--nav-->
 
 <body>
-
-    @yield('content')
-
-    <!--footer-->
-    <!---script-->
 
 </body>
 

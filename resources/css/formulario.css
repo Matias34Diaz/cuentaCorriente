@@ -1,0 +1,50 @@
+body {
+    background-color: #0a192f; /* Fondo azul oscuro */
+    color: #fff; /* Letras blancas */
+    font-family: Arial, sans-serif; /* Fuente predeterminada */
+}
+form {
+    background-color: rgba(255, 255, 255, 0.1); /* Fondo semi-transparente */
+    padding: 20px;
+    border-radius: 10px;
+    margin: 0 auto;
+    width: 400px;
+}
+input[type="text"],
+input[type="email"],
+textarea,
+select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.2); /* Fondo semi-transparente */
+    color: #fff; /* Letras blancas */
+    box-sizing: border-box; /* Incluir padding y border en el ancho */
+}
+input[type="submit"] {
+    background-color: #1e90ff; /* Fondo azul */
+    color: #fff; /* Letras blancas */
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+input[type="submit"]:hover {
+    background-color: #007bff; /* Fondo azul más oscuro al pasar el mouse */
+}
+select {
+width: 100%;
+padding: 10px;
+margin-bottom: 10px;
+border: none;
+border-radius: 5px;
+background-color: rgba(255, 255, 255, 0.2); /* Fondo semi-transparente */
+color: #000; /* Letras negras */
+box-sizing: border-box; /* Incluir padding y border en el ancho */
+}
+option {
+    background-color: #0a192f; /* Fondo azul oscuro */
+    color: #fff; /* Letras blancas */
+}
