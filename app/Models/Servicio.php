@@ -5,28 +5,27 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * Class Pago
+ * Class Servicio
  *
  * @property $id
  * @property $id_cuenta
- * @property $id_servicio
  * @property $monto
+ * @property $Saldo_Pendiente
  * @property $detalles
  * @property $fecha
  * @property $created_at
  * @property $updated_at
  *
  * @property Cuenta $cuenta
- * @property Servicio $servicio
+ * @property Pago[] $pagos
  * @package App
  * @mixin \Illuminate\Database\Eloquent\Builder
  */
-class Pago extends Model
+class Servicio extends Model
 {
 
     static $rules = [
         'id_cuenta' => 'required',
-        'id_servicio' => 'required',
         'monto' => 'required',
         'detalles' => 'required',
         'fecha' => 'required',
@@ -39,7 +38,7 @@ class Pago extends Model
      *
      * @var array
      */
-    protected $fillable = ['id_cuenta', 'id_servicio', 'monto', 'detalles', 'fecha'];
+    protected $fillable = ['id_cuenta', 'monto', 'Saldo_Pendiente', 'detalles', 'fecha'];
 
 
     /**
@@ -51,10 +50,10 @@ class Pago extends Model
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function servicio()
+    public function pagos()
     {
-        return $this->hasOne('App\Models\Servicio', 'id', 'id_servicio');
+        return $this->hasMany('App\Models\Pago', 'id_servicio', 'id');
     }
 }

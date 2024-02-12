@@ -7,59 +7,59 @@ use Illuminate\Http\Request;
 
 class CondicionFiscalController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        $condicionesFiscales = CondicionFiscal::paginate();
+
+        return view('condicion-fiscal.index', compact('condicionesFiscales'))
+            ->with('i', (request()->input('page', 1) - 1) * $condicionesFiscales->perPage());
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
+        $condicionFiscal = new CondicionFiscal();
+        return view('condicion-fiscal.create', compact('condicionFiscal'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        request()->validate(CondicionFiscal::$rules);
+
+        $condicionFiscal = CondicionFiscal::create($request->all());
+
+        return redirect()->route('condicion-fiscal.index')
+            ->with('success', 'CondicionFiscal created successfully.');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(CondicionFiscal $condicionFiscal)
+    public function show($id)
     {
-        //
+        $condicionFiscal = CondicionFiscal::find($id);
+
+        return view('condicion-fiscal.show', compact('condicionFiscal'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(CondicionFiscal $condicionFiscal)
+    public function edit($id)
     {
-        //
+        $condicionFiscal = CondicionFiscal::find($id);
+
+        return view('condicion-fiscal.edit', compact('condicionFiscal'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, CondicionFiscal $condicionFiscal)
     {
-        //
+        request()->validate(CondicionFiscal::$rules);
+
+        $condicionFiscal->update($request->all());
+
+        return redirect()->route('condicion-fiscal.index')
+            ->with('success', 'CondicionFiscal updated successfully');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(CondicionFiscal $condicionFiscal)
+    public function destroy($id)
     {
-        //
+        $condicionFiscal = CondicionFiscal::find($id)->delete();
+
+        return redirect()->route('condicion-fiscal.index')
+            ->with('success', 'CondicionFiscal deleted successfully');
     }
 }
