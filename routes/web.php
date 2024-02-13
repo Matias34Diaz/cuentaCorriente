@@ -1,11 +1,7 @@
 <?php
 
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ClienteController;
-use App\Http\Controllers\CondicionFiscalController;
-use App\Http\Controllers\CuentaController;
-use App\Http\Controllers\PagoController;
-
 
 /*
 |--------------------------------------------------------------------------
@@ -19,29 +15,17 @@ use App\Http\Controllers\PagoController;
 */
 
 Route::get('/', function () {
-    // Si el usuario ya está autenticado, redirigirlo a la página de inicio
-    if (Auth::check()) {
-        return redirect('/home'); // O a cualquier otra página de inicio
-    }
-    // De lo contrario, mostrar la vista de inicio de sesión
-    return view('auth.login');
-})->name('login');
+    return view('welcome');
+});
 
-Auth::routes();
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
 
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
 
-Route::resource('cliente', App\Http\Controllers\ClienteController::class)->middleware('auth');
-Route::resource('condicion-fiscal', App\Http\Controllers\CondicionFiscalController::class)->middleware('auth');
-Route::resource('cuentas', App\Http\Controllers\CuentaController::class)->middleware('auth');
-Route::resource('servicios', App\Http\Controllers\ServicioController::class)->middleware('auth');
-Route::resource('pagos', App\Http\Controllers\PagoController::class)->middleware('auth');
-
-// ->middleware('auth');
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-
-
-
-
-
-//
+require __DIR__.'/auth.php';
